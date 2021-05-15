@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////
 //
-// Unit tests for DiseaseMonitor.h
+// Unit tests for MyStudies.h
 // Οποιαδήποτε υλοποίηση οφείλει να περνάει όλα τα tests.
 //
 //////////////////////////////////////////////////////////////////
@@ -47,7 +47,6 @@ void check_student_list(List result, int ids[], int size) {
 	for (ListNode node = list_first(result); node != LIST_EOF; node = list_next(result, node)) {
 		int id = ((Student)list_node_value(result, node))->id;
 
-		// printf("%d  %d   %d\n", 0, ids[i], id);
 		TEST_ASSERT(ids[i] == id);
 		i++;
 	}
@@ -123,7 +122,7 @@ void test_top_by_year(void) {
 	for(int i = 0; i < student_no; i++)
 		ms_insert_student(&students[i]);	
 
-	// different values of 'number' for each year
+	// Για κάθε έτος, ζητάμε τον 1ο καλύτερο, τους 2 πρώτους, τους 3, κλπ
 	int ids1[] = {15, 16, 17};
 	for(int i = 1; i <= sizeof(ids1)/sizeof(int); i++)
 		check_student_list(ms_top_by_year(300, i), ids1, i);
@@ -146,7 +145,7 @@ void test_bottom_by_year(void) {
 	for(int i = 0; i < student_no; i++)
 		ms_insert_student(&students[i]);	
 
-	// different values of 'number' for each year
+	// Για κάθε έτος, ζητάμε τον 1ο χειρότερο, τους 2 πρώτους, τους 3, κλπ
 	int ids1[] = {17, 16, 15};
 	for(int i = 1; i <= sizeof(ids1)/sizeof(int); i++)
 		check_student_list(ms_bottom_by_year(300, i), ids1, i);
@@ -162,8 +161,8 @@ void test_bottom_by_year(void) {
 	ms_destroy();
 }
 
-// Οι πράξεις με float δεν έχουν καλή ακρίβεια, η συνήθης πρακτική είναι να ελέγχουμε ότι
-// είναι απλά κοντά στην σωστή τιμή.
+// Οι πράξεις με float δεν έχουν καλή ακρίβεια, η συνήθης πρακτική
+// είναι να ελέγχουμε ότι είναι απλά κοντά στην σωστή τιμή.
 //
 static bool float_equal(float a, float b) {
 	return fabs(a - b) < 0.00001;
@@ -174,7 +173,7 @@ void test_average_by_year(void) {
 
 	// insert students
 	for(int i = 0; i < student_no; i++)
-		ms_insert_student(&students[i]);	
+		ms_insert_student(&students[i]);
 
 	TEST_ASSERT(float_equal(ms_average_by_year(281), 5.6));
 	TEST_ASSERT(float_equal(ms_average_by_year(296), 6.2));
@@ -194,6 +193,7 @@ void test_city_rank(void) {
 	for(int i = 0; i < student_no; i++)
 		ms_insert_student(&students[i]);	
 
+	// Στην περίπτωση ισότητας, η υλοποίηση μπορεί να επιστρέφει τις πόλεις με οποιαδήποτε σειρά.
 	TEST_ASSERT(
 		(strcmp(ms_city_rank(1), "Stark") == 0 && strcmp(ms_city_rank(2), "Lannister") == 0) ||
 		(strcmp(ms_city_rank(2), "Stark") == 0 && strcmp(ms_city_rank(1), "Lannister") == 0)

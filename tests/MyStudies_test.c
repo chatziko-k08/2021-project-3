@@ -45,9 +45,8 @@ void check_student_list(List result, int ids[], int size) {
 
 	int i = 0;
 	for (ListNode node = list_first(result); node != LIST_EOF; node = list_next(result, node)) {
-		int id = ((Student)list_node_value(result, node))->id;
-
-		TEST_ASSERT(ids[i] == id);
+		Student stud = list_node_value(result, node);
+		TEST_ASSERT(ids[i] == stud->id);
 		i++;
 	}
 

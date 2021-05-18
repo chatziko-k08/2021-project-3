@@ -20,12 +20,4 @@
 		"arg5": "",
 		"arg6": "",
 	},
-	"files.associations": {
-		"*.asc": "javascript",
-		"*.json": "jsonc",
-		"*.mkd": "markdown",
-		"*.tmpl": "html",
-		"thread": "c",
-		"typeinfo": "c"
-	},
 }
